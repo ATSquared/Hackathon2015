@@ -1,7 +1,7 @@
 ﻿<?php
 	//connect to db
 	if(isset($_POST['submit'])){
-		var_dump($_POST);
+		//var_dump($_POST);
 		$date = $_POST['date'];
 		$hours = $_POST['hours'];
 		$minutes = $_POST['minutes'];
@@ -11,18 +11,60 @@
 		$zip = $_POST['zip'];
 		$capactiy = $_POST['capacity'];
 		$comments = $_POST['comments'];
+		
+		$url = 'http://hacktest2015.azurewebsites.net/WcfDataService1.svc/PickupRequests';
+		//$data = array('key1' => 'value1', 'key2' => 'value2');
+
+		//create codeblock
+		$options = array(
+			'http' => array(
+				'header'  => "Content-type: application/json",
+				'method'  => 'POST',
+				'content' => "{ 'PickupDate':'2015-05-02T15:00:00','Address':'1647 S. Blue Island Ave.','City':'Chicago','State':'Illinois','ZIP':'60608','Duration':'3.50','PassengerCount':0}",
+			),
+		);
+		$context  = stream_context_create($options);
+		$result = file_get_contents($url, false, $context);
+
+		var_dump($result);
+		//end of create
+		
+		//read codeblock
+		$test = file_get_contents('http://hacktest2015.azurewebsites.net/WcfDataService1.svc/PickupRequests');
+		$xml = simplexml_load_string($test);
+		foreach($xml->entry as $entry)
+		var_dump($entry->content->children("m", true)->children("d",true) );
+		//end of read
+		/*
+		$sxe = new SimpleXMLElement($test);
+		$namespaces = $sxe->getNamespaces(true);
+		var_dump($namespaces);
+		
+		$json = json_encode($xml, JSON_PRETTY_PRINT, 100);
+		$array = json_decode($json,TRUE);
+		//var_dump($json);
+		
+		//var_dump(array_keys($array['entry'][0]['id']));
+		var_dump($array['entry'][0]['content']);
+		
+		*/
+		
+		//$r = new HttpRequest('http://hacktest2015.azurewebsites.net/WcfDataService1.svc/PickupRequests', HttpRequest::METH_POST);
+		//$r->setOptions(array('cookies' => array('lang' => 'de')));
+		//$r->addPostFields(array('user' => 'mike', 'pass' => 's3c|r3t'));
+		//$r->addPostFile('image', 'profile.jpg', 'image/jpeg');
+		/*
+		try {
+			echo $r->send()->getBody();
+		} catch (HttpException $ex) {
+			echo $ex;
+		}
+		*/
+		
 	}//end of if submit pressed
 	
-	/*
-	try {
-	   $conn = new PDO ( "sqlsrv:server = tcp:wgjt9bqvga.database.windows.net,1433; Database = hack2015", "hack", "#CrushingIt");
-	   $conn->setAttribute( PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION );
-	}
-	catch ( PDOException $e ) {
-	   print( "Error connecting to SQL Server." );
-	   die(print_r($e));
-	}
-	*/
+	
+	
 	
 	?>
 <!DOCTYPE html>
@@ -41,9 +83,17 @@
 	<script src="style/jquery-ui-1.11.4.custom/jquery-ui.min.js"></script>
 	<link rel="stylesheet" href="style/jquery-ui-1.11.4.custom/jquery-ui.css">
 	<link rel="stylesheet" href="style/jquery-ui-1.11.4.custom/jquery-ui.min.css">
+	
+	<!--chosen-->
+	<!--<link rel="stylesheet" href="style/chosen_v1.4.2/chosen.css">-->
+	<!--<script src="style/chosen_v1.4.2/chosen.jquery.js"></script>-->
+	<!--<script src="style/chose_v1.4.2/chosen.jquery.min.js"></script>-->
+	
+	
 	<script type="text/javascript">
 		$(function e(){
 			$("#date").datepicker();
+			//$("select").chosen();
 			//$("select").selectmenu();
 		})//end of document.ready
 	</script>	
@@ -82,7 +132,7 @@
 					</div>
 					<!--end of hours-->
 					<div class="form-group col-md-3">
-					<label for="hours" class="control-label"></label>
+					<label for="hours" class="control-label">&nbsp;</label>
 						<select name="minutes" class="form-control">
 							<option value = "00">00</option>
 							<option value= "15">15</option>
@@ -92,7 +142,7 @@
 					</div>
 					<!--end of minutes-->
 					<div class="form-group col-md-3">
-					<label for="hours" class="control-label"></label>
+					<label for="hours" class="control-label">&nbsp;</label>
 						<select name="amPm" class="form-control">
 							<option value="am">AM</option>
 							<option value="pm">PM</option>
