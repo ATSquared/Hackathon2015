@@ -125,7 +125,7 @@
 					echo "<td>";
 					echo $xml->PassengerCount;
 					echo "</td>";
-					echo '<td><a class="btn btn-default" href="drivers.php?id='.$xml->ID.'">Register</a></td>';
+					echo '<td><a class="btn btn-default" href="register.php?id='.$xml->ID.'">Register</a></td>';
 					echo "</td>";
 					echo "</tr>";
 				}
