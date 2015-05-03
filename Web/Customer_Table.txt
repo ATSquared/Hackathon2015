@@ -1,0 +1,24 @@
+USE [hack2015]
+GO
+
+/****** Object:  Table [dbo].[Customer]    Script Date: 5/3/2015 12:16:43 AM ******/
+SET ANSI_NULLS OFF
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE TABLE [dbo].[Customer](
+	[ID] [int] IDENTITY(1,1) NOT NULL,
+	[FirstName] [nvarchar](100) NOT NULL,
+	[LastName] [nvarchar](100) NOT NULL,
+	[PhoneNumber] [nvarchar](20) NULL,
+ CONSTRAINT [PrimaryKey_d036bc02-8c9b-4341-ad31-857c2aad619d] PRIMARY KEY CLUSTERED 
+(
+	[ID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON)
+)
+
+GO
+
+

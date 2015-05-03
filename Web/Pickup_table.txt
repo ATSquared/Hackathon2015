@@ -1,0 +1,45 @@
+USE [hack2015]
+GO
+
+/****** Object:  Table [dbo].[Pickup]    Script Date: 5/3/2015 12:18:19 AM ******/
+SET ANSI_NULLS OFF
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE TABLE [dbo].[Pickup](
+	[DriverId] [int] NULL,
+	[CustomerId] [int] NOT NULL,
+	[PickupRequestId] [int] NOT NULL,
+	[DateAccepted] [datetime2](7) NULL,
+	[ID] [int] IDENTITY(1,1) NOT NULL,
+ CONSTRAINT [PrimaryKey_d91f6891-ce5e-4e5d-be2b-3bf74a2ee376] PRIMARY KEY CLUSTERED 
+(
+	[ID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON)
+)
+
+GO
+
+ALTER TABLE [dbo].[Pickup]  WITH CHECK ADD  CONSTRAINT [FK_Pickup_0] FOREIGN KEY([DriverId])
+REFERENCES [dbo].[Driver] ([ID])
+GO
+
+ALTER TABLE [dbo].[Pickup] CHECK CONSTRAINT [FK_Pickup_0]
+GO
+
+ALTER TABLE [dbo].[Pickup]  WITH CHECK ADD  CONSTRAINT [FK_Pickup_1] FOREIGN KEY([CustomerId])
+REFERENCES [dbo].[Customer] ([ID])
+GO
+
+ALTER TABLE [dbo].[Pickup] CHECK CONSTRAINT [FK_Pickup_1]
+GO
+
+ALTER TABLE [dbo].[Pickup]  WITH CHECK ADD  CONSTRAINT [FK_Pickup_2] FOREIGN KEY([PickupRequestId])
+REFERENCES [dbo].[PickupRequest] ([ID])
+GO
+
+ALTER TABLE [dbo].[Pickup] CHECK CONSTRAINT [FK_Pickup_2]
+GO
+

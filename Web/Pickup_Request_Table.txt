@@ -1,0 +1,27 @@
+USE [hack2015]
+GO
+
+/****** Object:  Table [dbo].[PickupRequest]    Script Date: 5/3/2015 12:18:32 AM ******/
+SET ANSI_NULLS OFF
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE TABLE [dbo].[PickupRequest](
+	[ID] [int] IDENTITY(1,1) NOT NULL,
+	[PickupDate] [datetime2](7) NOT NULL,
+	[Address] [nvarchar](100) NOT NULL,
+	[City] [nvarchar](100) NOT NULL,
+	[State] [nvarchar](50) NOT NULL,
+	[ZIP] [nvarchar](50) NOT NULL,
+	[Duration] [decimal](18, 2) NOT NULL,
+ CONSTRAINT [PrimaryKey_c812f499-4c76-4f86-8726-a5299873481c] PRIMARY KEY CLUSTERED 
+(
+	[ID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON)
+)
+
+GO
+
+
