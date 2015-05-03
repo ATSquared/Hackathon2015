@@ -22,8 +22,6 @@
 		$duration = $_POST['duration'];
 		$capacity = $_POST['capacity'];
 		$comments = $_POST['comments'];
-		
-		var_dump($date);
 
 		//create codeblock
 		$url = 'http://hacktest2015.azurewebsites.net/WcfDataService1.svc/PickupRequests';
@@ -80,14 +78,14 @@
 			$("#date").datepicker();
 			$("input").blur(function e(){
 				if(!($(this).val() != ""))	
-					$(this).focus();
+					this.focus();
 			});//end of input on blur
 			
 			$('#zip').blur(function e(){
 				var pattern = /\d{6}/;
-				if(!pattern.test($(this).val()){
-					$(this).value = "Please enter a six digit number";
-					$(this).focus();
+				if(!pattern.test($(this).val())){
+					//$(this).value = "Please enter a six digit number";
+					this.focus();
 				}
 			});//end of zip on blur
 			
