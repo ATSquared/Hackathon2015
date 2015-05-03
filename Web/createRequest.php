@@ -13,10 +13,7 @@
 		else if($hours < 10){
 			$hours = "0".$hours;
 		}
-		$arr = explode("/", $date);
-		$date = $arr[2]."-".$arr[0]."-".$arr[1];
-		
-		//$date = implode("-", explode("/", $date));
+		$date = implode("-", explode("/", $date));
 		$date .= "T$hours:$minutes:00";
 		$address = $_POST['address'];
 		$city = $_POST['city'];
@@ -34,16 +31,14 @@
 				'method'  => 'POST',
 				//'content' => "{ 'PickupDate':'2015-05-02T15:00:00','Address':'1647 S. Blue Island Ave.','City':'Chicago','State':'Illinois','ZIP':'60608','Duration':'3.50','PassengerCount':0}",
 				//'content' => "{'PickupDate':'$date','Address':'$address','City':'$city','State':'$state','ZIP':'$zip','Duration':'$duration','PassengerCount':$capacity}"
-				'content' => "{\"PickupDate\":\"$date\",\"Address\":\"$address\",\"City\":\"$city\",\"State\":\"$state\",\"ZIP\":\"$zip\",\"Duration\":\"$duration\",\"PassengerCount\":$capacity}",
+				'content' => "{ \"PickupDate\":\"2015-05-02T15:00:00\",\"Address\":\"1647 S. Blue Island Ave.\",\"City\":\"Chicago\",\"State\":\"Illinois\",\"ZIP\":\"60608\",\"Duration\":\"3.50\",\"PassengerCount\":0}",
 			),
 		);
 		$context  = stream_context_create($options);
 		$result = file_get_contents($url, false, $context);
 
-		/*
-		var_dump($result);
-		var_dump($options['http']);
-		*/
+		//var_dump($result);
+		//var_dump($options['http']);
 		//end of create
 		
 		
@@ -55,7 +50,6 @@
 			var_dump($entry->content->children("m", true)->children("d",true) );
 		*/
 		//end of read	
-		header('Location: register.php/');
 	}//end of if submit pressed
 	
 	
@@ -119,7 +113,7 @@
   	</div><!--end of jumbotron-->
   	<div class="container">
 	<!--change action to next screen later-->
-	   <form method="post" action="createRequest.php">
+	   <form method="post" action="userScreen.php">
 		   <!--date-->
 		   <div class="row">
 				<div class="form-group col-md-3">
