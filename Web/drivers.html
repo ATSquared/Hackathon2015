@@ -18,6 +18,13 @@
 		$(function() {
 			$('#loadTable').load("php/drivers.php");
 		});
+		$(document).ready(function(){
+			$("#registerButton").click(function() {
+				//interact with the database; set variable that this user has chosen this event
+				//a href to the details page
+			});
+		});
+		
 	</script>	
     <!-- Bootstrap -->
    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
@@ -60,7 +67,7 @@
 	</div>
 	<!--end of jumbotron-->
 	
-	<h2>Driver Details</h2>
+	<h2>Pickup Requests</h2>
 	<div id="loadTable">
 	</div>
 
