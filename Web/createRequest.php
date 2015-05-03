@@ -3,16 +3,33 @@
 	//connect to db
 	if(isset($_POST['submit'])){
 		$date = $_POST['date'];
+		/*
 		$hours = $_POST['hours'];
 		$minutes = $_POST['minutes'];
 		$amPm = $_POST['amPm'];
-		
-		if($amPm == "pm"){
+				if($amPm == "pm"){
 			$hours += 12;
 		}
 		else if($hours < 10){
 			$hours = "0".$hours;
 		}
+		*/
+		$time = $_POST['time'];
+		$hours = substr($time, 0, strrpos($time,":"));
+		$minutes = substr($time, (strrpos($time, ":")+1), 2);
+		$am = substr($time, (strlen($time)-2));
+		
+		if($hours == 12) {
+			if($am=="am")
+				$hours = "00";
+		}
+		else if($am == "pm"){
+			$hours += 12;
+		}
+		else if($hours < 10){
+			$hours = "0".$hours;
+		}
+		
 		$arr = explode("/", $date);
 		$date = $arr[2]."-".$arr[0]."-".$arr[1];
 		
@@ -42,9 +59,6 @@
 		header('Location: register.php/');
 	}//end of if submit pressed
 	
-	
-	
-	
 	?>
 
 <html lang="en">
@@ -58,11 +72,37 @@
 	<!--jquery-->
 	<script src="http://code.jquery.com/jquery-1.10.2.js"></script>
 	<script type="text/javascript" src="style/jquery-ui-1.11.4.custom/jquery-ui.js"></script>
+	<script type="text/javascript" src="style/timepicker/jquery.timepicker.js"></script>
+	<link rel="stylesheet" href="style/timepicker/jquery.timepicker.css">
 	<link rel="stylesheet" href="style/jquery-ui-1.11.4.custom/jquery-ui.css">
 	
 	<script type="text/javascript">
 		$(function e(){
 			$("#date").datepicker();
+			$('#time').timepicker();
+			
+			 $( "#capacity-slider" ).slider({
+			  range: "min",
+			  value: 2,
+			  min: 1,
+			  max: 20,
+			  slide: function( event, ui ) {
+				$( "#capacity" ).val(ui.value );
+			  }
+			});//end of slider
+			$( "#capacity" ).val($( "#capacity-slider" ).slider( "value" ) );
+			
+			$( "#duration-slider" ).slider({
+			  range: "min",
+			  value: 2,
+			  min: 1,
+			  max: 5,
+			  slide: function( event, ui ) {
+				$( "#duration" ).val(ui.value );
+			  }
+			});//end of slider
+			$( "#duration" ).val($( "#duration-slider" ).slider( "value" ) );
+			
 			/*$("input").blur(function e(){
 				if(!($(this).val() != ""))	
 					this.focus();
@@ -103,6 +143,7 @@
   	<div class="container">
 	<!--change action to next screen later-->
 	   <form method="post" action="createRequest.php">
+
 		   <!--date-->
 		   <div class="row">
 				<div class="form-group col-md-3">
@@ -113,51 +154,31 @@
 							</div>
 				</div>
 				<!--end of date-->
-			  <!--hours-->
-				<div class="form-group col-md-3">
-					<label for="hours" class="control-label">Time</label>
-						<select id="hours" name="hours" class="form-control">
-							<?php
-								for($i = 1; $i <= 12; $i++)
-									echo "<option>$i<//option>";
-							?>
-						</select>
-					</div>
-					<!--end of hours-->
-					<div class="form-group col-md-3">
-					<label for="hours" class="control-label">&nbsp;</label>
-						<select name="minutes" class="form-control">
-							<option value = "00">00</option>
-							<option value= "15">15</option>
-							<option value= "30">30</option>
-							<option value= "45">45</option>
-						</select>
-					</div>
-					<!--end of minutes-->
-					<div class="form-group col-md-3">
-					<label for="hours" class="control-label">&nbsp;</label>
-						<select name="amPm" class="form-control">
-							<option value="am">AM</option>
-							<option value="pm">PM</option>
-						</select>
-					</div>
-					<!--am, pm-->
-				</div><!--end div row-->
+				<div class="form-group col-md-2">
+					<label for="time" class="control-label">Time</label>
+						<div class="input-group">
+							<input type="text" class="form-control" id="time" name="time" >
+							<span class="input-group-addon glyphicon glyphicon-time"></span>
+						</div>
+				</div><!--end of form group-->
+			</div><!--end div row-->
 				<!--end of time-->
 		   <!--address-->
 		   <div class="row">
-			  <div class="form-group col-md-3">
+			  <div class="form-group col-md-5">
 				<label for="address" class="control-label" >Address</label>
 					<input type="text" class="form-control" id="address" name="address" placeholder="Address">
 				</div>
 			  <!--City-->
-				<div class="form-group col-md-3">
+		  </div><!--end of row-->
+		  <div class="row">
+				<div class="form-group col-md-2">
 					<label for="city" class="control-label" >City</label>
 						<input type="text" class="form-control" id="city" name="city" placeholder="city">
 				</div>
 			<!--end of city-->
 			  <!--State-->
-				<div class="form-group col-md-3">
+				<div class="form-group col-md-2">
 					<label for="state" class="control-label" >State</label>
 							<select id="state" name="state" class="form-control" >
 								<option value="">Select a State</option>
@@ -215,35 +236,27 @@
 					</div>
 				<!--end of state-->
 			  <!--zip-->
-				<div class="form-group col-md-3">
+				<div class="form-group col-md-2">
 					<label for="zip" class="control-label" >Zip</label>
-						<input type="text" class="col-md-3 form-control" id="zip" name="zip" placeholder="Zip" size="6" maxlength="6">
+						<input type="text" class="col-md-3 form-control" id="zip" name="zip" placeholder="Zip" size="5" maxlength="5">
 						<!--<input type="text" class="form-control" id="zip" name="zip" placeholder="Zip" pattern=".d{6}">-->
 					</div>
 					<!--end of zip-->
 			</div><!--end of row-->
 			<div class="row">
-			  <div class="form-group col-md-6">
-					<label for="duration" class="control-label">Duration</label>
-								<select id="duration" name="duration" class="form-control">
-							<?php
-								for($i = 1; $i <= 5; $i++)
-									echo "<option>$i<//option>";
-							?>
-						</select>
-					</div>
+
 			  <!--Passengers-->
-			  
-				  <div class="form-group col-md-6">
-					<label for="capacity" class="control-label"># of Passengers</label>
-								<select id="capacity" name="capacity" class="form-control">
-							<?php
-								for($i = 1; $i <= 20; $i++)
-									echo "<option>$i<//option>";
-							?>
-						</select>
-					</div>
-			</div><!--end of row-->
+			  <div class="form-group col-md-2">
+				  <label for="duration" class="control-label">Number of Passengers:</label>
+				  <input type="text" class="form-control" id="duration" name="duration" readonly>			 
+				<div id="duration-slider"></div>
+			</div>		
+			<div class="form-group col-md-2">
+				  <label for="capacity" class="control-label">Number of Passengers:</label>
+				  <input type="text" class="form-control" id="capacity" name="capacity" readonly>			 
+				<div id="capacity-slider"></div>
+			</div>		
+		</div><!--end of row-->
 			  <!--end of passengers-->
 			  <div class="row">
 				<!--comments-->

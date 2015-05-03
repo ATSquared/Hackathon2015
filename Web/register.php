@@ -34,36 +34,14 @@
 
   <body>
 	
-	
-    <nav class="navbar navbar-inverse navbar-fixed-top">
-      <div class="container">
-        <div class="navbar-header">
-          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-            <span class="sr-only">Toggle navigation</span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-          </button>
-          <a class="navbar-brand" href="#">Project name</a>
-        </div>
-        <div id="navbar" class="collapse navbar-collapse">
-          <ul class="nav navbar-nav">
-            <li class="active"><a href="#">Home</a></li>
-            <li><a href="#about">About</a></li>
-            <li><a href="#contact">Contact</a></li>
-          </ul>
-        </div><!--/.nav-collapse -->
-      </div><!--end of container-->
-    </nav>
-	
 	<div class="jumbotron">
 		<div class="container">
 			<h1>Hackathon 2015</h1>
+			<h2>Pickup Requests</h2>
 		</div><!--end of container--> 
 	</div><!--end of jumbotron-->
 	
 	<div class="container">
-		<h2>Pickup Requests</h2>
 	<div class="form-group">
 	  <table class="table table-striped">
 		  <tr>
@@ -80,42 +58,22 @@
 				foreach($xml->entry as $entry)
 				{
 					$xml = $entry->content->children("m", true)->children("d",true);
-					echo "<tr>
-						 <td>$xml->PickupDate</td>
-						 <td>$xml->Duration</td>
+					
+					echo "<tr>";
+					$date = (string)$xml->PickupDate;
+					$year = substr($date, 0, 4);
+					$month = substr($date, 5, 2);
+					$day = substr($date, 8, 2);
+					$time = substr($date, strpos($date, "T") +1, 5);
+					echo "<td>$month/$day/$year $time</td>";
+						 
+					echo "	 <td>$xml->Duration</td>
 						 <td>$xml->Address</td>
 						 <td>$xml->City</td>
 						 <td>$xml->State</td>
 						 <td>$xml->ZIP</td>
 						 <td>$xml->PassengerCount</td>";
 					echo  '<td><a class="btn btn-default" href=register.php?id='.$xml->ID.'>Register</a></td></td></tr>';
-					/*
-					echo "<tr>";
-					echo "<td>";
-					echo $xml->PickupDate;
-					echo "</td>";
-					echo "<td>";
-					echo $xml->Duration;
-					echo "</td>";
-					echo "<td>";
-					echo $xml->Address;
-					echo "</td>";
-					echo "<td>";
-					echo $xml->City;
-					echo "</td>";
-					echo "<td>";
-					echo $xml->State;
-					echo "</td>";
-					echo "<td>";
-					echo $xml->ZIP;
-					echo "</td>";
-					echo "<td>";
-					echo $xml->PassengerCount;
-					echo "</td>";
-					echo '<td><a class="btn btn-default" href="register.php?id='.$xml->ID.'">Register</a></td>';
-					echo "</tr>";
-					echo "</td>";
-					*/
 				}
 			?>
 	  </table>
