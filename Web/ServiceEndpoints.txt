@@ -1,0 +1,4 @@
+http://hacktest2015.azurewebsites.net/WcfDataService1.svc/Pickups
+http://hacktest2015.azurewebsites.net/WcfDataService1.svc/Customers
+http://hacktest2015.azurewebsites.net/WcfDataService1.svc/Drivers
+http://hacktest2015.azurewebsites.net/WcfDataService1.svc/PickupRequests
