@@ -2,3 +2,12 @@ http://hacktest2015.azurewebsites.net/WcfDataService1.svc/Pickups
 http://hacktest2015.azurewebsites.net/WcfDataService1.svc/Customers
 http://hacktest2015.azurewebsites.net/WcfDataService1.svc/Drivers
 http://hacktest2015.azurewebsites.net/WcfDataService1.svc/PickupRequests
+
+{
+	"PickupDate":"2015-05-02T15:00:00",
+	"Address":"1647 S. Blue Island Ave.",
+	"City":"Chicago",
+	"State":"Illinois",
+	"ZIP":"60608",
+	"Duration":"3.50"
+}
