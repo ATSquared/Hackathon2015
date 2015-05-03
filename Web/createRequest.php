@@ -235,12 +235,12 @@
 			  <!--Passengers-->
 			  <div class="form-group col-md-2">
 				  <label for="duration" class="control-label">Duration</label>
-				  <input type="text" class="form-control" id="duration" name="duration" readonly>			 
+				  <input type="text" class="form-control" id="duration" name="duration" >			 
 				<div id="duration-slider"></div>
 			</div>		
 			<div class="form-group col-md-2">
 				  <label for="capacity" class="control-label">Number of Passengers</label>
-				  <input type="text" class="form-control" id="capacity" name="capacity" readonly>			 
+				  <input type="text" class="form-control" id="capacity" name="capacity" >			 
 				<div id="capacity-slider"></div>
 			</div>		
 		</div><!--end of row-->
