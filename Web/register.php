@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <?php
 	//connect to db
 	$test = file_get_contents('http://hacktest2015.azurewebsites.net/WcfDataService1.svc/PickupRequests');
@@ -15,9 +16,8 @@
 		);
 		$context  = stream_context_create($options);
 		$result = file_get_contents($pickups, false, $context);
-		var_dump($result);
 	}//end of if submit pressed
-?><!DOCTYPE html>
+?>
 <html lang="en">
   <head>
   <meta charset="utf-8">
@@ -26,21 +26,10 @@
     <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
     <title>User Screen</title>
 
-	<!--jquery-->
+		<!--jquery-->
 	<script src="http://code.jquery.com/jquery-1.10.2.js"></script>
-	<script src="http://code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
-	<script src="style/jquery-ui-1.11.4.custom/jquery-ui.js"></script>
-	<script src="style/jquery-ui-1.11.4.custom/jquery-ui.min.js"></script>
-	<link rel="stylesheet" href="style/jquery-ui-1.11.4.custom/jquery-ui.css">
-	<link rel="stylesheet" href="style/jquery-ui-1.11.4.custom/jquery-ui.min.css">	
     <!-- Bootstrap -->
    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
-  
-  <script type="text/css">
-	table {
-		border: 1px solid black;
-	}
-  </script>
   </head>
 
   <body>
@@ -64,19 +53,17 @@
             <li><a href="#contact">Contact</a></li>
           </ul>
         </div><!--/.nav-collapse -->
-      </div>
+      </div><!--end of container-->
     </nav>
 	
 	<div class="jumbotron">
 		<div class="container">
 			<h1>Hackathon 2015</h1>
 		</div><!--end of container--> 
-	</div>
-	<!--end of jumbotron-->
+	</div><!--end of jumbotron-->
 	
 	<div class="container">
 		<h2>Pickup Requests</h2>
-			<div>
 	<div class="form-group">
 	  <table class="table table-striped">
 		  <tr>
@@ -90,19 +77,19 @@
 			<th></th>
 		  </tr>
 			<?php
-			
-				/*
-				for (i = 1; i <= maximumRows; i++) {
-					echo "<tr>";
-					for (i = 1; i <= numberOfColumns; i++) {
-						echo "<td>value[i]</td>"
-					} 
-					echo "</tr>"
-				}
-				*/
 				foreach($xml->entry as $entry)
 				{
 					$xml = $entry->content->children("m", true)->children("d",true);
+					echo "<tr>
+						 <td>$xml->PickupDate</td>
+						 <td>$xml->Duration</td>
+						 <td>$xml->Address</td>
+						 <td>$xml->City</td>
+						 <td>$xml->State</td>
+						 <td>$xml->ZIP</td>
+						 <td>$xml->PassengerCount</td>";
+					echo  '<td><a class="btn btn-default" href=register.php?id='.$xml->ID.'>Register</a></td></td></tr>';
+					/*
 					echo "<tr>";
 					echo "<td>";
 					echo $xml->PickupDate;
@@ -126,20 +113,14 @@
 					echo $xml->PassengerCount;
 					echo "</td>";
 					echo '<td><a class="btn btn-default" href="register.php?id='.$xml->ID.'">Register</a></td>';
-					echo "</td>";
 					echo "</tr>";
+					echo "</td>";
+					*/
 				}
 			?>
 	  </table>
-	</div>
-	</div>
-    <!-- Bootstrap core JavaScript
-    ================================================== -->
-    <!-- Placed at the end of the document so the pages load faster -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
-    <script src="../../dist/js/bootstrap.min.js"></script>
-    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
-    <script src="../../assets/js/ie10-viewport-bug-workaround.js"></script>
+		</div><!--end of form group-->
+	</div><!--end of container-->
   </body>
 </html>
 

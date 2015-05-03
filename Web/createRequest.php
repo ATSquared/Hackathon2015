@@ -32,29 +32,13 @@
 			'http' => array(
 				'header'  => "Content-type: application/json",
 				'method'  => 'POST',
-				//'content' => "{ 'PickupDate':'2015-05-02T15:00:00','Address':'1647 S. Blue Island Ave.','City':'Chicago','State':'Illinois','ZIP':'60608','Duration':'3.50','PassengerCount':0}",
-				//'content' => "{'PickupDate':'$date','Address':'$address','City':'$city','State':'$state','ZIP':'$zip','Duration':'$duration','PassengerCount':$capacity}"
 				'content' => "{\"PickupDate\":\"$date\",\"Address\":\"$address\",\"City\":\"$city\",\"State\":\"$state\",\"ZIP\":\"$zip\",\"Duration\":\"$duration\",\"PassengerCount\":$capacity}",
 			),
 		);
 		$context  = stream_context_create($options);
 		$result = file_get_contents($url, false, $context);
 
-		/*
-		var_dump($result);
-		var_dump($options['http']);
-		*/
-		//end of create
-		
-		
-		//read codeblock
-		/*
-		$test = file_get_contents('http://hacktest2015.azurewebsites.net/WcfDataService1.svc/PickupRequests');
-		$xml = simplexml_load_string($test);
-		foreach($xml->entry as $entry)
-			var_dump($entry->content->children("m", true)->children("d",true) );
-		*/
-		//end of read	
+
 		header('Location: register.php/');
 	}//end of if submit pressed
 	
@@ -73,20 +57,18 @@
 
 	<!--jquery-->
 	<script src="http://code.jquery.com/jquery-1.10.2.js"></script>
-	<script src="http://code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
-	<script src="style/jquery-ui-1.11.4.custom/jquery-ui.js"></script>
-	<script src="style/jquery-ui-1.11.4.custom/jquery-ui.min.js"></script>
+	<script type="text/javascript" src="style/jquery-ui-1.11.4.custom/jquery-ui.js"></script>
 	<link rel="stylesheet" href="style/jquery-ui-1.11.4.custom/jquery-ui.css">
-	<link rel="stylesheet" href="style/jquery-ui-1.11.4.custom/jquery-ui.min.css">
 	
 	<script type="text/javascript">
 		$(function e(){
 			$("#date").datepicker();
-			$("input").blur(function e(){
+			/*$("input").blur(function e(){
 				if(!($(this).val() != ""))	
 					this.focus();
 			});//end of input on blur
-			
+			*/
+			/*
 			$('#zip').blur(function e(){
 				var pattern = /\d{6}/;
 				if(!pattern.test($(this).val())){
@@ -94,6 +76,7 @@
 					this.focus();
 				}
 			});//end of zip on blur
+			*/
 			
 			//$('#submit').submit(function e(){
 								
