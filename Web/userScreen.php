@@ -12,6 +12,18 @@
 		$capactiy = $_POST['capacity'];
 		$comments = $_POST['comments'];
 	}//end of if submit pressed
+	
+	/*
+	try {
+	   $conn = new PDO ( "sqlsrv:server = tcp:wgjt9bqvga.database.windows.net,1433; Database = hack2015", "hack", "#CrushingIt");
+	   $conn->setAttribute( PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION );
+	}
+	catch ( PDOException $e ) {
+	   print( "Error connecting to SQL Server." );
+	   die(print_r($e));
+	}
+	*/
+	
 	?>
 <!DOCTYPE html>
 <html lang="en">
@@ -47,9 +59,7 @@
   	</div><!--end of jumbotron-->
   	<div class="container">
 	<!--change action to next screen later-->
-		
-		   <form method="post" action="userScreen.php">
-		   <h2>Date</h2>
+	   <form method="post" action="userScreen.php">
 		   <!--date-->
 		   <div class="row">
 				<div class="form-group col-md-3">
@@ -58,8 +68,9 @@
 								<input type="text" class="form-control" id="date" name="date" placeholder="Date">
 								<span class="input-group-addon glyphicon glyphicon-calendar"></span>
 							</div>
-				</div><!--end of date-->
-			  <!--time-->
+				</div>
+				<!--end of date-->
+			  <!--hours-->
 				<div class="form-group col-md-3">
 					<label for="hours" class="control-label">Time</label>
 						<select id="hours" name="hours" class="form-control">
@@ -68,40 +79,43 @@
 									echo "<option>$i<//option>";
 							?>
 						</select>
-					</div><!--end of hours-->
+					</div>
+					<!--end of hours-->
 					<div class="form-group col-md-3">
+					<label for="hours" class="control-label"></label>
 						<select name="minutes" class="form-control">
 							<option value = "00">00</option>
 							<option value= "15">15</option>
 							<option value= "30">30</option>
 							<option value= "45">45</option>
 						</select>
-					</div><!--end of minutes-->
+					</div>
+					<!--end of minutes-->
 					<div class="form-group col-md-3">
+					<label for="hours" class="control-label"></label>
 						<select name="amPm" class="form-control">
 							<option value="am">AM</option>
 							<option value="pm">PM</option>
 						</select>
-					</div><!--am, pm-->
+					</div>
+					<!--am, pm-->
 				</div><!--end div row-->
 				<!--end of time-->
-		   <h2>Location</h2>
 		   <!--address-->
-			  <div class="form-group">
+		   <div class="row">
+			  <div class="form-group col-md-3">
 				<label for="address" class="col-md-2 control-label" >Address</label>
-				<div class="col-md-10">
 					<input type="text" class="form-control" id="address" name="address" placeholder="Address">
 				</div>
 			  <!--City-->
+				<div class="form-group col-md-3">
 					<label for="city" class="col-md-2 control-label" >City</label>
-					<div class="col-md-2">
 						<input type="text" class="form-control" id="city" name="city" placeholder="city">
-					</div>
-				<!--</div><!--end of city-->
+				</div>
+			<!--end of city-->
 			  <!--State-->
-				<!--<div class="form-group">-->
+				<div class="form-group col-md-3">
 					<label for="state" class="col-md-2 control-label" >State</label>
-					<div class="col-md-2">
 							<select id="state" name="state" class="form-control" >
 								<option value="">Select a State</option>
 								<option value="AL">Alabama</option>
@@ -158,42 +172,40 @@
 					</div>
 				<!--end of state-->
 			  <!--zip-->
-				<!--<div class="form-group">-->
+				<div class="form-group col-md-3">
 					<label for="zip" class="col-md-2 control-label" >Zip</label>
-					<div class="col-md-2">
-						<input type="text" class="form-control" id="zip" name="zip" placeholder="Zip" size="6" maxlength="6">
+						<input type="text" class="col-md-3 form-control" id="zip" name="zip" placeholder="Zip" size="6" maxlength="6">
 						<!--<input type="text" class="form-control" id="zip" name="zip" placeholder="Zip" pattern=".d{6}">-->
 					</div>
-				</div>
-				<!--</div><!--end of zip-->
+					<!--end of zip-->
+			</div><!--end of row-->
 			  <!--Passengers-->
-			  <div class="form-group">
-				<label for="capacity" class="col-md-2 control-label">Number of Passengers</label>
-				<div class="col-md-2">
-							<select id="capacity" name="capacity" class="form-control">
-						<?php
-							for($i = 1; $i <= 20; $i++)
-								echo "<option>$i<//option>";
-						?>
-					</select>
-				</div>
-			  </div><!--end of passengers-->
-				<!--comments-->
-				<div class="form-group">
-					<label for="comments" class="col-md-2 control-label">Comments</label>	
-					<div class="col-md-10">
-						<textarea class="form-control" name="comments" rows="3" placeholder="Comments"></textarea>
+			  <div class="row">
+				  <div class="form-group col-md-5">
+					<label for="capacity" class="col-md-5 control-label"># of Passengers</label>
+								<select id="capacity" name="capacity" class="form-control">
+							<?php
+								for($i = 1; $i <= 20; $i++)
+									echo "<option>$i<//option>";
+							?>
+						</select>
 					</div>
+			</div><!--end of row-->
+			  <!--end of passengers-->
+			  <div class="row">
+				<!--comments-->
+				<div class="form-group col-md-12">
+					<label for="comments" class="col-md-5 control-label">Comments</label>	
+						<textarea class="form-control" name="comments" rows="3" placeholder="Comments"></textarea>
 				</div>
 					<!--end of comments-->
-					
+			  </div><!--end of row-->
+				<div class="row">
 					  <!--submit-->
-				<div class="form-group">
-					<label for="submit" class="col-md-2 control-label">Submit Request</label>
-					<div class="col-md-2">
-						<input type="submit" class="btn btn-primary" id="submit" name="submit" placeholder="submit">
+					<div class="form-group col-md-5">
+							<input type="submit" class="btn btn-primary" id="submit" name="submit" value="submit">
 					</div><!--end of submit-->
-				</div>
+				</div><!--end of row-->
 			</form>
 	</div><!--end of container-->
 </body>
