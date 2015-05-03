@@ -2,7 +2,7 @@
 <?php
 	//connect to db
 	if(isset($_POST['submit'])){
-		$date = $_POST['date']
+		$date = $_POST['date'];
 		$time = $_POST['time'];
 		$hours = substr($time, 0, strrpos($time,":"));
 		$minutes = substr($time, (strrpos($time, ":")+1), 2);
