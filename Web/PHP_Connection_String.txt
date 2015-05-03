@@ -1,0 +1,18 @@
+Server: wgjt9bqvga.database.windows.net,1433
+SQL Database: hack2015
+User Name: hack
+
+PHP Data Objects(PDO) Sample Code:
+
+try {
+   $conn = new PDO ( \"sqlsrv:server = tcp:wgjt9bqvga.database.windows.net,1433; Database = hack2015\", \"hack\", \"{your_password_here}\");
+   $conn->setAttribute( PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION );
+}
+catch ( PDOException $e ) {
+   print( \"Error connecting to SQL Server.\" );
+   die(print_r($e));
+}
+
+SQL Server Extension Sample Code:
+
+$connectionInfo = array(\"UID\" => \"hack@wgjt9bqvga\", \"pwd\" => \"{your_password_here}\", \"Database\" => \"hack2015\", \"LoginTimeout\" => 30, \"Encrypt\" => 1);\r\n$serverName = \"tcp:wgjt9bqvga.database.windows.net,1433\";\r\n$conn = sqlsrv_connect($serverName, $connectionInfo);
