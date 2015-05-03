@@ -1,6 +1,5 @@
 ﻿<!DOCTYPE html>
 <?php
-	//connect to db
 	if(isset($_POST['submit'])){
 		$date = $_POST['date'];
 		$hours = $_POST['hours'];
@@ -15,8 +14,7 @@
 		}
 		$arr = explode("/", $date);
 		$date = $arr[2]."-".$arr[0]."-".$arr[1];
-		
-		//$date = implode("-", explode("/", $date));
+
 		$date .= "T$hours:$minutes:00";
 		$address = $_POST['address'];
 		$city = $_POST['city'];
@@ -37,22 +35,6 @@
 		);
 		$context  = stream_context_create($options);
 		$result = file_get_contents($url, false, $context);
-
-		/*
-		var_dump($result);
-		var_dump($options['http']);
-		*/
-		//end of create
-		
-		
-		//read codeblock
-		/*
-		$test = file_get_contents('http://hacktest2015.azurewebsites.net/WcfDataService1.svc/PickupRequests');
-		$xml = simplexml_load_string($test);
-		foreach($xml->entry as $entry)
-			var_dump($entry->content->children("m", true)->children("d",true) );
-		*/
-		//end of read	
 		header('Location: register.php/');
 	}//end of if submit pressed
 	
