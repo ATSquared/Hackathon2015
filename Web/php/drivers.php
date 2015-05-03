@@ -9,10 +9,9 @@
 		$passengerCapacity = $_POST['passengerCapacity'];
 	}//end of if submit pressed
 ?>
-<div class="col-md-6">
-	<div class="container">
+<div>
+	<div class="form-group">
 	  <table class="table table-striped">
-		<thead>
 		  <tr>
 			<th>Pickup Date</th>
 			<th>Expected Duration</th>
@@ -20,9 +19,8 @@
 			<th>City</th>
 			<th>State</th>
 			<th>ZIP</th>
+			<th></th>
 		  </tr>
-		</thead>
-		<tbody>
 			<?php
 				/*
 				for (i = 1; i <= maximumRows; i++) {
@@ -41,12 +39,11 @@
 						echo "</td>";
 					}
 					echo "<td>";
-					echo "<input type='button' id='registerButton' name='registerButton' value='Register' onclick='register()'>";
+					echo "<input type='button' id='registerButton' name='registerButton' class='btn btn-default' value='Register' onclick='register()'>";
 					echo "</td>";
 					echo "</tr>";
 				}
 			?>
-		</tbody>
 	  </table>
 	</div>
 </div>
