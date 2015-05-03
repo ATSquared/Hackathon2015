@@ -9,5 +9,6 @@ http://hacktest2015.azurewebsites.net/WcfDataService1.svc/PickupRequests
 	"City":"Chicago",
 	"State":"Illinois",
 	"ZIP":"60608",
-	"Duration":"3.50"
+	"Duration":"3.50",
+	"PassengerCount":0
 }
