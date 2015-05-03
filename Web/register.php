@@ -27,9 +27,9 @@
     <title>User Screen</title>
 
 		<!--jquery-->
-	<script src="http://code.jquery.com/jquery-1.10.2.js"></script>
+	<script type="type/javascript" src="http://code.jquery.com/jquery-1.10.2.js"></script>
     <!-- Bootstrap -->
-   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+   <link type="text/css" rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
   </head>
 
   <body>

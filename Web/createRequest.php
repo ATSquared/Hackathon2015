@@ -2,18 +2,7 @@
 <?php
 	//connect to db
 	if(isset($_POST['submit'])){
-		$date = $_POST['date'];
-		/*
-		$hours = $_POST['hours'];
-		$minutes = $_POST['minutes'];
-		$amPm = $_POST['amPm'];
-				if($amPm == "pm"){
-			$hours += 12;
-		}
-		else if($hours < 10){
-			$hours = "0".$hours;
-		}
-		*/
+		$date = $_POST['date']
 		$time = $_POST['time'];
 		$hours = substr($time, 0, strrpos($time,":"));
 		$minutes = substr($time, (strrpos($time, ":")+1), 2);
@@ -32,8 +21,6 @@
 		
 		$arr = explode("/", $date);
 		$date = $arr[2]."-".$arr[0]."-".$arr[1];
-		
-		//$date = implode("-", explode("/", $date));
 		$date .= "T$hours:$minutes:00";
 		$address = $_POST['address'];
 		$city = $_POST['city'];
@@ -70,11 +57,11 @@
     <title>User Screen</title>
 
 	<!--jquery-->
-	<script src="http://code.jquery.com/jquery-1.10.2.js"></script>
+	<script type="text/javascript" src="http://code.jquery.com/jquery-1.10.2.js"></script>
 	<script type="text/javascript" src="style/jquery-ui-1.11.4.custom/jquery-ui.js"></script>
 	<script type="text/javascript" src="style/timepicker/jquery.timepicker.js"></script>
-	<link rel="stylesheet" href="style/timepicker/jquery.timepicker.css">
-	<link rel="stylesheet" href="style/jquery-ui-1.11.4.custom/jquery-ui.css">
+	<link type="text/css" rel="stylesheet" href="style/timepicker/jquery.timepicker.css">
+	<link type="text/css" rel="stylesheet" href="style/jquery-ui-1.11.4.custom/jquery-ui.css">
 	
 	<script type="text/javascript">
 		$(function e(){
